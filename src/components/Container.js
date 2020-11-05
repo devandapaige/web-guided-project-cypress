@@ -12,13 +12,9 @@ const initialFormState = {
 
 export default function Container() {
   ////////////// STATES //////////////
-  ////////////// STATES //////////////
-  ////////////// STATES //////////////
   const [quotes, setQuotes] = useState([])
   const [formValues, setFormValues] = useState(initialFormState)
 
-  ////////////// NETWORK HELPERS //////////////
-  ////////////// NETWORK HELPERS //////////////
   ////////////// NETWORK HELPERS //////////////
   const getQuotes = () => {
     axios.get(quotesURL)
@@ -27,14 +23,12 @@ export default function Container() {
       })
       .catch(handleError)
   }
-
   const postQuote = ({ text, author }) => {
     axios.post(quotesURL, { text, author })
       .then(res => setQuotes(quotes.concat(res.data)))
       .catch(handleError)
       .finally(resetForm)
   }
-
   const putQuote = ({ id, text, author }) => {
     axios.put(`${quotesURL}/${id}`, { text, author })
       .then(res => {
@@ -45,7 +39,6 @@ export default function Container() {
       .catch(handleError)
       .finally(resetForm)
   }
-
   const deleteQuote = (id) => {
     axios.delete(`${quotesURL}/${id}`)
       .then(res => { // eslint-disable-line
@@ -54,11 +47,8 @@ export default function Container() {
       .catch(handleError)
       .finally(resetForm)
   }
-
   ////////////// OTHER HELPERS //////////////
-  ////////////// OTHER HELPERS //////////////
-  ////////////// OTHER HELPERS //////////////
-  const editQuote = (id) => {
+    const editQuote = (id) => {
     const quote = quotes.find(q => q.id === id)
     setFormValues({ ...quote })
   }
@@ -66,9 +56,6 @@ export default function Container() {
   const handleError = err => { debugger } // eslint-disable-line
 
   const resetForm = () => setFormValues(initialFormState)
-
-  ////////////// SIDE EFFECTS //////////////
-  ////////////// SIDE EFFECTS //////////////
   ////////////// SIDE EFFECTS //////////////
   useEffect(() => getQuotes(), [])
 

@@ -7,35 +7,27 @@ export default function Form(props) {
     reset,
     submitHandlers: { postQuote, putQuote },
   } = props
-
-  ////////////// EVENT HANDLERS //////////////
-  ////////////// EVENT HANDLERS //////////////
   ////////////// EVENT HANDLERS //////////////
   const onCancel = evt => {
     evt.preventDefault()
     reset()
   }
-
   const onSubmit = evt => {
     evt.preventDefault()
     values.id
       ? putQuote(values)
       : postQuote(values)
   }
-
   const onChange = evt => {
     // pull these out of the event to avoid the `persist()`
     const { name, value } = evt.target
     setValues({ ...values, [name]: value })
   }
-
   ////////////// HELPER //////////////
-  ////////////// HELPER //////////////
-  ////////////// HELPER //////////////
+  //will disable the "Submit" button until the form is filled in both fields.
   const isDisabled = () => {
     return !values.text.trim() || !values.author.trim()
   }
-
   return (
     <form onSubmit={onSubmit}>
       <h3>{values.id ? 'Edit' : 'Add New'} Quote</h3>
